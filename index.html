@@ -8,8 +8,7 @@
        *{
         margin: 0;
         padding: 0;
-        background-color: rgb(44, 8, 8);
-        color: white;
+      
        }
        div{
         height: 100vh;
@@ -18,12 +17,44 @@
         justify-content: center;
         gap: 10px;
        }
+     button{
+        padding: 5px 13px;
+        background-color: white;
+        color: black;
+        border: none;
+        border-radius: 4px;
+     }
+   
+     .darkMode{
+        background-color: black;
+        color: white;
+     }
+    
     </style>
   </head>
   <body>
     <div>
       <p>using the init command we access the git repo</p>
       <p>using the git init command</p>
+    </br>
+      <button id="but">Click</button>
     </div>
+    <script>
+     const button = document.querySelector("#but");
+     button.classList = ("darkMode");
+     console.log(button);
+     const body = document.querySelector("body");
+     body.classList = ("darkMode");
+
+     button.addEventListener("click",()=>{
+        if(body.classList.contains("darkMode")){
+            body.classList.remove("darkMode");
+            button.classList.add("darkMode");
+        }else{
+            body.classList.add("darkMode");
+            button.classList.remove("darkMode");
+        }
+     })
+    </script>
   </body>
 </html>
