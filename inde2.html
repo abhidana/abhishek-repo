@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width ,initial-scale=1.0" />
+    <title>Asyncronous</title>
+    <style>
+      * {
+        font: italic small-caps bold 16px/2 cursive;
+        color: white;
+        margin: 0;
+        padding: 0;
+      }
+      #backImage {
+        /* height: 100%;
+        width: 100%; */
+        background-image: url(foodimg.avif);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .image {
+        height: 200px;
+        width: 200px;
+        margin-bottom: 20px;
+        display: flex;
+        padding: 10px;
+        border-radius: 7%;
+        opacity: 0.8;
+      }
+      #container1 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 10px;
+        scroll-behavior: smooth;
+        /* margin-left: 7%; */
+      }
+      .divChild {
+        border-radius: 15px;
+        color: rgb(255, 255, 255, 0.9);
+        font: 1.2rem "Fira Sans", sans-serif;
+        padding: 20px;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1);
+      }
+      .para {
+        color: rgb(255, 255, 255, 0.7);
+        font-weight: 200;
+      }
+      #navBar {
+        /* position: sticky;
+        top: 0.5rem; */
+        width: 95.7%;
+        margin-left: 5px;
+        padding: 20px;
+        border: 2px solid yellow;
+        border-radius: 15px;
+        background-color: black;
+      }
+      #heding {
+        font-size: 50px;
+        color: #fca311;
+        font: small-caps bold 50px/1 sans-serif;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <div id="backImage">
+      <div id="navBar">
+        <h1 id="heding">Food items and their recipe</h1>
+      </div>
+      <div id="container1"></div>
+    </div>
+    <script>
+      const container1 = document.getElementById("container1");
+      let foodApi =
+        "https://dummyjson.com/recipes?sortBy=name&order=asc&limit=32";
+      let Data = fetch(foodApi);
+      Data.then((convert) => convert.json()).then((Datajson) => {
+        Datajson.recipes.forEach((recipe, index) => {
+          let index1 = index + 1;
+          let recipe1 = recipe.name;
+          const createContainer = document.createElement("div");
+          createContainer.classList.add("divChild");
+          createContainer.innerText = recipe1;
+          container1.appendChild(createContainer);
+
+          let image = recipe.image;
+          const imageContainer = document.createElement("img");
+          imageContainer.classList.add("image");
+          imageContainer.src = image;
+          imageContainer.alt = recipe1;
+          createContainer.appendChild(imageContainer);
+
+          recipe.ingredients.map((eachIngredients) => {
+            const createContainer2 = document.createElement("li");
+            createContainer2.classList.add("para");
+            createContainer2.innerText = eachIngredients;
+            createContainer.appendChild(createContainer2);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
